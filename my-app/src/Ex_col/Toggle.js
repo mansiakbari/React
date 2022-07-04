@@ -21,4 +21,3 @@ function Toggle(props) {
 }
 export default Toggle;
 
-// An ornamental stand and used as a piece of decorative furniture in room.

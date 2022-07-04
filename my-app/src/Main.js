@@ -1,14 +1,28 @@
-import React from 'react'
-import Button from './Ex_col/Button'
-
-
-function Main() {
+import React, { useState } from "react";
+import Loader from "./Ex_col/Loader";
+function Button({ isLoading, children, ...props }) {
+  return <button {...props}>{isLoading ? <Loader /> : children}</button>;
+}
+function Example() {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
   return (
     <div>
-      <Button name="Mansi" loadin="true"/>
+      <center>
+        <h1>
+          <Button
+            onClick={() => {
+              setIsButtonLoading(true);
+              setTimeout(() => {
+                setIsButtonLoading(false);
+              }, 1000);
+            }}
+            isLoading={isButtonLoading}
+          >
+            Mansi Akbari
+          </Button>
+        </h1>
+      </center>
     </div>
-    
-  )
+  );
 }
-export default Main
-
+export default Example;
