@@ -1,7 +1,8 @@
 import "./App.css";
 // import React, { useState } from "react";
 import React, { Component } from "react";
-import Person from "./Person/Person";
+import Radium,{StyleRoot} from "radium";
+import Person from "./Persons/Person/Person";
 
 // // //functional compo
 // // const App = (props)=>{
@@ -48,7 +49,7 @@ import Person from "./Person/Person";
 // // export default App;
 
 //class component..
-export default class App extends Component {
+class App extends Component {
   //use of state..only use in class..
   state = {
     persons: [
@@ -88,7 +89,8 @@ export default class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
     this.setState({
-      persons: persons });
+      persons: persons,
+    });
   };
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -98,9 +100,13 @@ export default class App extends Component {
     const style = {
       backgroundColor: "skyblue",
       font: "inherit",
-      border: "3px solid pink",
+      border: "3px solid #C70039",
       padding: "8px",
       cursor: "pointer",
+      ':hover':{
+        backgroundColor:"#34495E",
+        color:"#DAF7A6"
+      }
     };
     let persons = null;
     if (this.state.showPersons === true) {
@@ -135,18 +141,34 @@ export default class App extends Component {
           /> */}
         </div>
       );
+      style.backgroundColor = "orange";
+     style[':hover']={
+        backgroundColor:"#FCF0AB",
+        color:"#641E16"
+      }
+    }
+    const classes =[];
+    if(this.state.persons.length <=2){
+      classes.push('red')
+    }
+    if(this.state.persons.length <=1){
+      classes.push('bold')
     }
     return (
+      <StyleRoot>
       <div className="App">
         <h1>Hi...React App</h1>
+        <p className={classes.join(' ')}>This Is Really Worked....</p>
         <button style={style} onClick={this.togglePersonsHandler}>
           List Persons
         </button>
         {persons}
       </div>
+      </StyleRoot>
     );
   }
 }
+export default Radium(App)
 
 //regular with functional...state not use in function....
 // import Person from './Person/Person';
@@ -190,8 +212,6 @@ export default class App extends Component {
 //     )
 //   }
 // }
-
-
 
 // import React from "react";
 // import Form from "./Form/Form";
